@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMORA by Vismaya | Saree Draping Services</title>
+    
+    <link rel="icon" href="images/Amora_Logo.png" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. CSS VARIABLES & RESET --- */
+        :root {
+            --primary-gold: #d4af37;
+            --secondary-gold: #b4932a;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-light: #f9f9f9;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html, body {
+            font-family: 'Open Sans', sans-serif; 
+            color: var(--text-dark); 
+            line-height: 1.6; 
+            background-color: var(--white);
+            max-width: 100%;
+            overflow-x: hidden; 
+        }
+
+        a { text-decoration: none; transition: all 0.3s ease; }
+        ul { list-style: none; }
+
+        /* --- 2. HEADER & NAVIGATION --- */
+        .main-header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05); 
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            backdrop-filter: blur(5px);
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+        }
+
+        .amora-logo { height: 70px; width: auto; display: block; }
+
+        .main-nav ul { display: flex; align-items: center; gap: 40px; }
+
+        .nav-link {
+            color: var(--text-dark); font-weight: 600; font-size: 0.95rem;
+            text-transform: uppercase; letter-spacing: 1px; position: relative;
+        }
+
+        .nav-link::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
+            background-color: var(--primary-gold); transition: width 0.3s;
+        }
+
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { color: var(--primary-gold); }
+
+        .contact-btn {
+            border: 2px solid var(--text-dark); padding: 10px 25px; border-radius: 4px;
+        }
+
+        .contact-btn:hover {
+            background-color: var(--text-dark); color: var(--white); border-color: var(--text-dark);
+        }
+        .contact-btn::after { display: none; } 
+
+        /* Mobile Nav */
+        .mobile-nav-toggle { 
+            display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--text-dark); padding: 10px;
+        }
+        .mobile-menu {
+            display: none; position: fixed; top: 90px; left: 0; width: 100%; background: var(--white);
+            border-top: 1px solid #eee; box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            text-align: center; padding: 0; z-index: 999;
+        }
+        .mobile-menu a { 
+            display: block; padding: 20px; font-weight: 600; color: var(--text-dark);
+            border-bottom: 1px solid #f0f0f0; font-size: 1.1rem;
+        }
+        .mobile-menu.active { display: block; }
+
+        /* --- 3. HERO SECTION --- */
+        .hero {
+            position: relative;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+            overflow: hidden;
+            background-color: #333; /* Fallback color */
+        }
+
+        /* The Background Slider Container */
+        .hero-slider {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        .slide-item {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transform: scale(1);
+            /* Animation: Name | Duration | Timing | Infinite loop */
+            animation: zoomFade 18s infinite; 
+        }
+
+        /* Dark Overlay */
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); 
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative; 
+            z-index: 3;
+            max-width: 900px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        /* Images */
+        .slide-item:nth-child(1) { background-image: url('images/bg1.png'); animation-delay: 0s; }
+        .slide-item:nth-child(2) { background-image: url('images/bg2.png'); animation-delay: 6s; }
+        .slide-item:nth-child(3) { background-image: url('images/bg3.png'); animation-delay: 12s; }
+
+        @keyframes zoomFade {
+            0% { opacity: 0; transform: scale(1); }
+            10% { opacity: 1; }
+            33% { opacity: 1; }
+            45% { opacity: 0; transform: scale(1.1); } 
+            100% { opacity: 0; }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem; font-weight: 800; margin-bottom: 20px;
+            text-transform: uppercase; letter-spacing: 2px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+        .hero h2 {
+            font-size: 1.4rem; font-weight: 300; margin-bottom: 30px;
+            font-style: italic; text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        }
+        .cta-button {
+            display: inline-block; background-color: var(--primary-gold); color: var(--white);
+            padding: 15px 40px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; border-radius: 4px; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+            margin-top: 20px;
+        }
+        .cta-button:hover { background-color: var(--secondary-gold); transform: translateY(-3px); color: var(--white); }
+
+        /* --- 4. SERVICES & VISION --- */
+        .section-padding { padding: 100px 0; }
+        .bg-grey { background-color: var(--bg-light); }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.5rem; color: var(--text-dark); margin-bottom: 15px; font-weight: 700; }
+        .section-title span { display: block; width: 60px; height: 3px; background-color: var(--primary-gold); margin: 0 auto; }
+        
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .service-card {
+            background: var(--white); padding: 40px 30px; text-align: center;
+            border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.4s ease; border-bottom: 4px solid transparent;
+        }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-bottom: 4px solid var(--primary-gold); }
+        .service-icon { font-size: 3rem; color: var(--primary-gold); margin-bottom: 20px; display: block; }
+        .service-card h3 { font-size: 1.4rem; margin-bottom: 15px; color: var(--text-dark); font-weight: 700; }
+        .service-card p { color: var(--text-light); font-size: 1rem; }
+
+        .vision-section { background-color: var(--white); text-align: center; }
+        .vision-content { max-width: 800px; margin: 0 auto; }
+        .vision-text { font-size: 1.1rem; color: var(--text-light); line-height: 1.8; margin-bottom: 25px; }
+        .highlight-text {
+            color: var(--primary-gold); font-weight: 700; font-size: 1.4rem;
+            font-family: 'Playfair Display', serif; display: block; margin-top: 30px; font-style: italic;
+        }
+
+        /* --- 5. GALLERY (EMPHASIZED BOX) --- */
+        .gallery-section {
+            padding: 80px 0;
+            background-color: var(--white); 
+        }
+
+        .gallery-frame {
+            /* Emphasized Box Styling */
+            border: 2px solid var(--primary-gold);
+            padding: 20px;
+            border-radius: 8px;
+            background-color: var(--bg-light);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .gallery-container {
+            column-count: 3;
+            column-gap: 20px;
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            opacity: 0;
+            animation: fadeInGallery 1s ease-in-out forwards;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img { transform: scale(1.05); }
+
+        .gallery-item:nth-child(1) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.6s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.8s; }
+        .gallery-item:nth-child(5) { animation-delay: 1.0s; }
+
+        @keyframes fadeInGallery {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- 6. VISITOR COUNTER --- */
+        .visitor-stats {
+            background-color: #222;
+            padding: 25px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box { text-align: center; }
+
+        .stat-number {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            font-family: monospace;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* --- 7. FOOTER --- */
+        footer { background-color: #222; color: #fff; padding: 40px 0; text-align: center; font-size: 0.9rem; }
+        footer p { opacity: 0.8; margin-bottom: 10px; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .main-nav { display: none; }
+            .mobile-nav-toggle { display: block; }
+            .navbar { height: 80px; }
+            .mobile-menu { top: 80px; }
+            
+            .hero { height: 80vh; }
+            .hero h1 { font-size: 2.2rem; }
+            .section-padding { padding: 60px 0; }
+            
+            .gallery-container { column-count: 1; }
+            .gallery-frame { padding: 10px; border-width: 1px; }
+            
+            .stats-grid { gap: 30px; }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .gallery-container { column-count: 2; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo-container">
+                    <a href="index.html">
+                        <img src="images/Amora_Logo.png" alt="AMORA by Vismaya" class="amora-logo">
+                    </a>
+                </div>
+                <nav class="main-nav" id="desktop-nav">
+                    <ul>
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="#services" class="nav-link">Services</a></li>
+                        <li><a href="#vision" class="nav-link">About</a></li>
+                        <li><a href="contact.html" class="nav-link contact-btn">Contact Us</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-nav-toggle" id="mobileToggle" aria-label="Toggle Menu">&#9776;</button>
+            </nav>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html">Home</a>
+            <a href="#services">Services</a>
+            <a href="#vision">About</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-slider">
+            <div class="slide-item"></div>
+            <div class="slide-item"></div>
+            <div class="slide-item"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <h1>AMORA by Vismaya</h1>
+            <h2>Because Every Saree Deserves the Perfect Drape</h2>
+            <p style="font-size: 1.1rem; opacity: 0.9; margin-bottom: 10px;">The Best Service. The Best Styles. For Bridesmaids and Special Occasions.</p>
+            <a href="contact.html" class="cta-button">Book An Appointment</a>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding bg-grey">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Our Services</h2>
+                <span></span>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <span class="service-icon">&#10024;</span> <h3>Saree Draping</h3>
+                    <p>Graceful, contemporary draping styles tailored for weddings and events. We ensure your saree stays perfect, comfortable, and elegant all day long.</p>
+                </div>
+                <div class="service-card reveal">
+                    <span class="service-icon">&#9635;</span> <h3>Box Pleating</h3>
+                    <p>Professional pre-pleating services to make your saree wearing experience effortless and neat. Perfect for quick changes during busy events.</p>
+                </div>
+                <div class="service-card reveal">
+                    <span class="service-icon">&#128142;</span> <h3>Jewelry Setting</h3>
+                    <p>Complete your look with our expert jewelry setting service. We help style your accessories to complement your drape perfectly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vision" class="section-padding vision-section">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Our Vision</h2>
+                <span></span>
+            </div>
+            <div class="vision-content reveal">
+                <p class="vision-text">At <strong>AMORA by Vismaya</strong>, our goal is to make you shine with elegance and confidence. We specialize in graceful, contemporary saree draping styles tailored for bridesmaids and special occasions.</p>
+                <p class="vision-text">Whether you're preparing for a wedding, a festive gathering, or a cherished moment, AMORA by Vismaya is your trusted companion. We believe that confidence begins with feeling beautifully put together.</p>
+                <span class="highlight-text">"Elegance is not standing out, but being remembered."</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <div class="gallery-frame reveal">
+                <div class="gallery-container">
+                    <div class="gallery-item"><img src="images/img1.png" alt="Saree Style 1"></div>
+                    <div class="gallery-item"><img src="images/img2.png" alt="Saree Style 2"></div>
+                    <div class="gallery-item"><img src="images/img3.png" alt="Saree Style 3"></div>
+                    <div class="gallery-item"><img src="images/img4.png" alt="Saree Style 4"></div>
+                    <div class="gallery-item"><img src="images/img5.png" alt="Saree Style 5"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="visitor-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-number" id="daily-count">0</span>
+                    <span class="stat-label">Daily Visitors</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="monthly-count">0</span>
+                    <span class="stat-label">Monthly Visitors</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="total-count">0</span>
+                    <span class="stat-label">Total Visits</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 AMORA by Vismaya. All Rights Reserved.</p>
+            <p style="font-size: 0.8rem; color: #aaa;">Saree Draping | Box Pleating | Styling</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- 1. Mobile Menu ---
+            const toggleBtn = document.getElementById('mobileToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            toggleBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                toggleBtn.innerHTML = mobileMenu.classList.contains('active') ? '&#10005;' : '&#9776;';
+            });
+            document.querySelectorAll('.mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    toggleBtn.innerHTML = '&#9776;';
+                });
+            });
+
+            // --- 2. Scroll Reveal ---
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 100;
+                revealElements.forEach((element) => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        element.classList.add('active');
+                    }
+                });
+            };
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll();
+
+            // --- 3. Visitor Counter ---
+            if (!localStorage.getItem('amora_visits')) {
+                localStorage.setItem('amora_visits', 1240);
+                localStorage.setItem('amora_month', 450);
+                localStorage.setItem('amora_day', 12);
+            }
+
+            let total = parseInt(localStorage.getItem('amora_visits')) + 1;
+            let month = parseInt(localStorage.getItem('amora_month')) + 1;
+            let day = parseInt(localStorage.getItem('amora_day')) + 1;
+
+            localStorage.setItem('amora_visits', total);
+            localStorage.setItem('amora_month', month);
+            localStorage.setItem('amora_day', day);
+
+            const animateValue = (id, start, end, duration) => {
+                const obj = document.getElementById(id);
+                if (!obj) return;
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    obj.innerHTML = Math.floor(progress * (end - start) + start);
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            animateValue("daily-count", 0, day, 2000);
+            animateValue("monthly-count", 0, month, 2000);
+            animateValue("total-count", 0, total, 2000);
+        });
+    </script>
+</body>
+</html>
