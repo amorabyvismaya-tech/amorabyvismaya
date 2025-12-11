@@ -250,40 +250,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- 6. VISITOR COUNTER --- */
-        .visitor-stats {
-            background-color: #222;
-            padding: 25px 0;
-            border-bottom: 1px solid #333;
-        }
-
-        .stats-grid {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            flex-wrap: wrap;
-        }
-
-        .stat-box { text-align: center; }
-
-        .stat-number {
-            display: block;
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary-gold);
-            font-family: monospace;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: #ccc;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 5px;
-            display: block;
-        }
-
-        /* --- 7. FOOTER --- */
+        /* --- 6. FOOTER --- */
         footer { background-color: #222; color: #fff; padding: 40px 0; text-align: center; font-size: 0.9rem; }
         footer p { opacity: 0.8; margin-bottom: 10px; }
 
@@ -300,8 +267,6 @@
             
             .gallery-container { column-count: 1; }
             .gallery-frame { padding: 10px; border-width: 1px; }
-            
-            .stats-grid { gap: 30px; }
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {
@@ -412,25 +377,6 @@
         </div>
     </section>
 
-    <section class="visitor-stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <span class="stat-number" id="daily-count">0</span>
-                    <span class="stat-label">Daily Visitors</span>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-number" id="monthly-count">0</span>
-                    <span class="stat-label">Monthly Visitors</span>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-number" id="total-count">0</span>
-                    <span class="stat-label">Total Visits</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <footer>
         <div class="container">
             <p>&copy; 2024 AMORA by Vismaya. All Rights Reserved.</p>
@@ -468,40 +414,6 @@
             };
             window.addEventListener('scroll', revealOnScroll);
             revealOnScroll();
-
-            // --- 3. Visitor Counter ---
-            if (!localStorage.getItem('amora_visits')) {
-                localStorage.setItem('amora_visits', 1240);
-                localStorage.setItem('amora_month', 450);
-                localStorage.setItem('amora_day', 12);
-            }
-
-            let total = parseInt(localStorage.getItem('amora_visits')) + 1;
-            let month = parseInt(localStorage.getItem('amora_month')) + 1;
-            let day = parseInt(localStorage.getItem('amora_day')) + 1;
-
-            localStorage.setItem('amora_visits', total);
-            localStorage.setItem('amora_month', month);
-            localStorage.setItem('amora_day', day);
-
-            const animateValue = (id, start, end, duration) => {
-                const obj = document.getElementById(id);
-                if (!obj) return;
-                let startTimestamp = null;
-                const step = (timestamp) => {
-                    if (!startTimestamp) startTimestamp = timestamp;
-                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                    obj.innerHTML = Math.floor(progress * (end - start) + start);
-                    if (progress < 1) {
-                        window.requestAnimationFrame(step);
-                    }
-                };
-                window.requestAnimationFrame(step);
-            }
-
-            animateValue("daily-count", 0, day, 2000);
-            animateValue("monthly-count", 0, month, 2000);
-            animateValue("total-count", 0, total, 2000);
         });
     </script>
 </body>
