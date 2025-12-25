@@ -1,420 +1,423 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMORA by Vismaya | Saree Draping Services</title>
-    
-    <link rel="icon" href="images/Amora_Logo.png" type="image/png">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AMORA by Vismaya — Saree Draping Services, Palakkad</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Favicon -->
+  <link rel="icon" href="images/logo.png" type="image/png" />
 
-    <style>
-        /* --- 1. CSS VARIABLES & RESET --- */
-        :root {
-            --primary-gold: #d4af37;
-            --secondary-gold: #b4932a;
-            --text-dark: #333333;
-            --text-light: #666666;
-            --bg-light: #f9f9f9;
-            --white: #ffffff;
-        }
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        html, body {
-            font-family: 'Open Sans', sans-serif; 
-            color: var(--text-dark); 
-            line-height: 1.6; 
-            background-color: var(--white);
-            max-width: 100%;
-            overflow-x: hidden; 
-        }
+  <style>
+    /* ----------------------
+       Design tokens
+    ---------------------- */
+    :root{
+      --bg:#fff8f4;
+      --panel:#ffffff;
+      --muted:#777777;
+      --text:#1d1d1f;
+      --accent:#cba44b; /* warm gold */
+      --accent-600:#b58f36;
+      --radius:12px;
+      --container:1200px;
+      --glass: rgba(255,255,255,0.6);
+    }
 
-        a { text-decoration: none; transition: all 0.3s ease; }
-        ul { list-style: none; }
+    /* Reset */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,'Helvetica Neue',Arial; color:var(--text); background:linear-gradient(180deg,#fff 0%,var(--bg) 100%); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
 
-        /* --- 2. HEADER & NAVIGATION --- */
-        .main-header {
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05); 
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            width: 100%;
-            backdrop-filter: blur(5px);
-        }
+    /* Container */
+    .container{max-width:var(--container);margin:0 auto;padding:0 20px}
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 90px;
-        }
+    /* ----------------------
+       Header
+    ---------------------- */
+    header.site-header{position:fixed;left:0;right:0;top:0;z-index:60;padding:22px 0;transition:all 0.35s ease}
+    header.site-header.inner{background:transparent}
+    header.site-header.scrolled{backdrop-filter:blur(6px);background:rgba(255,255,255,0.85);box-shadow:0 6px 24px rgba(13,12,11,0.06)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand img{height:46px;width:auto}
+    .brand .brand-text{font-family:Playfair Display,serif;font-weight:700;font-size:1.05rem;letter-spacing:0.6px}
 
-        .amora-logo { height: 70px; width: auto; display: block; }
+    .menu{display:flex;gap:28px;align-items:center}
+    .menu a{font-weight:600;font-size:0.95rem;color:var(--text);opacity:0.9;padding:6px 8px;border-radius:8px}
+    .menu a:hover{color:var(--accent);}
 
-        .main-nav ul { display: flex; align-items: center; gap: 40px; }
+    .cta{background:var(--accent);color:white;padding:10px 18px;border-radius:999px;font-weight:700;box-shadow:0 8px 20px rgba(203,164,75,0.18)}
+    .cta.secondary{background:transparent;color:var(--text);border:1px solid rgba(29,29,31,0.06)}
 
-        .nav-link {
-            color: var(--text-dark); font-weight: 600; font-size: 0.95rem;
-            text-transform: uppercase; letter-spacing: 1px; position: relative;
-        }
+    /* Mobile nav */
+    .hamburger{display:none;border:0;background:none;font-size:22px}
 
-        .nav-link::after {
-            content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
-            background-color: var(--primary-gold); transition: width 0.3s;
-        }
+    /* ----------------------
+       Hero (Cinematic)
+    ---------------------- */
+    .hero{min-height:82vh;display:grid;grid-template-columns:1fr 520px;align-items:center;padding:90px 0 60px;gap:40px}
+    .hero-left{max-width:720px}
+    .eyebrow{font-size:0.9rem;color:var(--muted);margin-bottom:10px}
+    h1.hero-title{font-family:Playfair Display,serif;font-size:3.1rem;margin-bottom:12px;line-height:1.02}
+    p.lead{color:var(--muted);font-size:1.05rem;margin-bottom:20px}
+    .hero-actions{display:flex;gap:12px;align-items:center}
 
-        .nav-link:hover::after { width: 100%; }
-        .nav-link:hover { color: var(--primary-gold); }
+    .hero-right{position:relative;align-self:stretch}
+    .hero-card{height:100%;border-radius:18px;overflow:hidden;box-shadow:0 18px 48px rgba(12,10,9,0.12);background:linear-gradient(180deg,rgba(0,0,0,0.03),rgba(255,255,255,0.03));}
+    .hero-photo{height:100%;object-fit:cover;width:100%;display:block}
 
-        .contact-btn {
-            border: 2px solid var(--text-dark); padding: 10px 25px; border-radius: 4px;
-        }
+    /* subtle hero caption */
+    .hero-caption{position:absolute;left:18px;bottom:18px;background:linear-gradient(90deg,rgba(0,0,0,0.45),rgba(0,0,0,0.18));color:white;padding:8px 12px;border-radius:10px;font-size:0.9rem}
 
-        .contact-btn:hover {
-            background-color: var(--text-dark); color: var(--white); border-color: var(--text-dark);
-        }
-        .contact-btn::after { display: none; } 
+    /* ----------------------
+       Sections
+    ---------------------- */
+    section{padding:72px 0}
+    .section-title{display:flex;flex-direction:column;align-items:center;margin-bottom:42px}
+    .section-title h2{font-family:Playfair Display,serif;font-size:1.8rem;margin-bottom:8px}
+    .section-title p{color:var(--muted);font-size:0.98rem;text-align:center;max-width:760px}
 
-        /* Mobile Nav */
-        .mobile-nav-toggle { 
-            display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--text-dark); padding: 10px;
-        }
-        .mobile-menu {
-            display: none; position: fixed; top: 90px; left: 0; width: 100%; background: var(--white);
-            border-top: 1px solid #eee; box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-            text-align: center; padding: 0; z-index: 999;
-        }
-        .mobile-menu a { 
-            display: block; padding: 20px; font-weight: 600; color: var(--text-dark);
-            border-bottom: 1px solid #f0f0f0; font-size: 1.1rem;
-        }
-        .mobile-menu.active { display: block; }
+    /* Services: horizontal cards */
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .service{background:var(--panel);border-radius:14px;padding:22px;display:flex;gap:16px;align-items:flex-start;box-shadow:0 6px 28px rgba(16,14,13,0.04);transition:transform .28s ease}
+    .service:hover{transform:translateY(-8px)}
+    .service .icon{height:56px;width:56px;border-radius:12px;background:linear-gradient(180deg,rgba(203,164,75,0.12),rgba(203,164,75,0.06));display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--accent)}
+    .service h3{margin-bottom:6px;font-size:1.05rem}
+    .service p{color:var(--muted);font-size:0.95rem}
 
-        /* --- 3. HERO SECTION --- */
-        .hero {
-            position: relative;
-            height: 85vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--white);
-            padding: 0 20px;
-            overflow: hidden;
-            background-color: #333; /* Fallback color */
-        }
+    /* Why choose (strip) */
+    .why{display:flex;gap:14px;justify-content:center;align-items:center}
+    .why .pill{background:linear-gradient(180deg,#fff,#fff);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 28px rgba(10,10,12,0.04)}
+    .why .pill strong{display:block}
+    .why .pill small{display:block;color:var(--muted);font-size:0.88rem}
 
-        /* The Background Slider Container */
-        .hero-slider {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1;
-        }
+    /* About split */
+    .about{display:grid;grid-template-columns:360px 1fr;gap:28px;align-items:center}
+    .about .portrait{border-radius:16px;overflow:hidden;border:6px solid rgba(203,164,75,0.09)}
+    .about .about-text p{color:var(--muted);line-height:1.7}
+    .signature{font-family:Playfair Display,serif;color:var(--accent-600);font-size:1.1rem;margin-top:12px}
 
-        .slide-item {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0;
-            transform: scale(1);
-            /* Animation: Name | Duration | Timing | Infinite loop */
-            animation: zoomFade 18s infinite; 
-        }
+    /* Gallery masonry (CSS columns fallback) */
+    .gallery-grid{column-count:3;column-gap:16px}
+    .gallery-item{break-inside:avoid;margin-bottom:14px;border-radius:10px;overflow:hidden;box-shadow:0 8px 28px rgba(8,7,7,0.06);cursor:pointer;transition:transform .28s ease}
+    .gallery-item:hover{transform:translateY(-6px)}
 
-        /* Dark Overlay */
-        .hero-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); 
-            z-index: 2;
-        }
+    /* Testimonials */
+    .testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .testimonial{background:var(--panel);padding:18px;border-radius:12px;box-shadow:0 8px 24px rgba(9,8,8,0.04)}
+    .testimonial p{color:var(--muted);font-size:0.95rem}
+    .testimonial strong{display:block;margin-top:10px}
 
-        .hero-content {
-            position: relative; 
-            z-index: 3;
-            max-width: 900px;
-            animation: fadeInUp 1.5s ease-out;
-        }
+    /* CTA band */
+    .cta-band{background:linear-gradient(90deg,#fff7f0 0%,#fffaf7 100%);border-radius:18px;padding:26px;display:flex;align-items:center;justify-content:space-between;gap:18px;border:1px solid rgba(203,164,75,0.06)}
 
-        /* Images */
-        .slide-item:nth-child(1) { background-image: url('images/bg1.png'); animation-delay: 0s; }
-        .slide-item:nth-child(2) { background-image: url('images/bg2.png'); animation-delay: 6s; }
-        .slide-item:nth-child(3) { background-image: url('images/bg3.png'); animation-delay: 12s; }
+    /* Footer */
+    footer.site-footer{padding:36px 0;border-top:1px solid rgba(16,14,12,0.03);color:var(--muted)}
+    .socials{display:flex;gap:12px}
 
-        @keyframes zoomFade {
-            0% { opacity: 0; transform: scale(1); }
-            10% { opacity: 1; }
-            33% { opacity: 1; }
-            45% { opacity: 0; transform: scale(1.1); } 
-            100% { opacity: 0; }
-        }
+    /* ----------------------
+       Lightbox modal
+    ---------------------- */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:150;opacity:0;pointer-events:none;transition:opacity .2s ease}
+    .modal.open{opacity:1;pointer-events:auto}
+    .modal .frame{max-width:90vw;max-height:86vh;border-radius:12px;overflow:hidden}
+    .modal img{display:block;width:100%;height:auto}
 
-        .hero h1 {
-            font-size: 3.5rem; font-weight: 800; margin-bottom: 20px;
-            text-transform: uppercase; letter-spacing: 2px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-        }
-        .hero h2 {
-            font-size: 1.4rem; font-weight: 300; margin-bottom: 30px;
-            font-style: italic; text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
-        }
-        .cta-button {
-            display: inline-block; background-color: var(--primary-gold); color: var(--white);
-            padding: 15px 40px; font-weight: 700; text-transform: uppercase;
-            letter-spacing: 1px; border-radius: 4px; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-            margin-top: 20px;
-        }
-        .cta-button:hover { background-color: var(--secondary-gold); transform: translateY(-3px); color: var(--white); }
+    /* ----------------------
+       Responsive
+    ---------------------- */
+    @media (max-width:1024px){
+      .hero{grid-template-columns:1fr 420px;padding-top:110px}
+      .services{grid-template-columns:repeat(2,1fr)}
+      .gallery-grid{column-count:2}
+      .testimonials{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:760px){
+      header.site-header{padding:14px 0}
+      .menu{display:none}
+      .hamburger{display:block}
+      .hero{grid-template-columns:1fr;padding:120px 0 40px}
+      .hero-right{order:-1;margin-bottom:18px}
+      .gallery-grid{column-count:1}
+      .about{grid-template-columns:1fr}
+      .services{grid-template-columns:1fr}
+      .testimonials{grid-template-columns:1fr}
+    }
 
-        /* --- 4. SERVICES & VISION --- */
-        .section-padding { padding: 100px 0; }
-        .bg-grey { background-color: var(--bg-light); }
-        .section-title { text-align: center; margin-bottom: 60px; }
-        .section-title h2 { font-size: 2.5rem; color: var(--text-dark); margin-bottom: 15px; font-weight: 700; }
-        .section-title span { display: block; width: 60px; height: 3px; background-color: var(--primary-gold); margin: 0 auto; }
-        
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .service-card {
-            background: var(--white); padding: 40px 30px; text-align: center;
-            border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            transition: all 0.4s ease; border-bottom: 4px solid transparent;
-        }
-        .service-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-bottom: 4px solid var(--primary-gold); }
-        .service-icon { font-size: 3rem; color: var(--primary-gold); margin-bottom: 20px; display: block; }
-        .service-card h3 { font-size: 1.4rem; margin-bottom: 15px; color: var(--text-dark); font-weight: 700; }
-        .service-card p { color: var(--text-light); font-size: 1rem; }
-
-        .vision-section { background-color: var(--white); text-align: center; }
-        .vision-content { max-width: 800px; margin: 0 auto; }
-        .vision-text { font-size: 1.1rem; color: var(--text-light); line-height: 1.8; margin-bottom: 25px; }
-        .highlight-text {
-            color: var(--primary-gold); font-weight: 700; font-size: 1.4rem;
-            font-family: 'Playfair Display', serif; display: block; margin-top: 30px; font-style: italic;
-        }
-
-        /* --- 5. GALLERY (EMPHASIZED BOX) --- */
-        .gallery-section {
-            padding: 80px 0;
-            background-color: var(--white); 
-        }
-
-        .gallery-frame {
-            /* Emphasized Box Styling */
-            border: 2px solid var(--primary-gold);
-            padding: 20px;
-            border-radius: 8px;
-            background-color: var(--bg-light);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-        }
-
-        .gallery-container {
-            column-count: 3;
-            column-gap: 20px;
-        }
-
-        .gallery-item {
-            break-inside: avoid;
-            margin-bottom: 20px;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            opacity: 0;
-            animation: fadeInGallery 1s ease-in-out forwards;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover img { transform: scale(1.05); }
-
-        .gallery-item:nth-child(1) { animation-delay: 0.2s; }
-        .gallery-item:nth-child(2) { animation-delay: 0.4s; }
-        .gallery-item:nth-child(3) { animation-delay: 0.6s; }
-        .gallery-item:nth-child(4) { animation-delay: 0.8s; }
-        .gallery-item:nth-child(5) { animation-delay: 1.0s; }
-
-        @keyframes fadeInGallery {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- 6. FOOTER --- */
-        footer { background-color: #222; color: #fff; padding: 40px 0; text-align: center; font-size: 0.9rem; }
-        footer p { opacity: 0.8; margin-bottom: 10px; }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .main-nav { display: none; }
-            .mobile-nav-toggle { display: block; }
-            .navbar { height: 80px; }
-            .mobile-menu { top: 80px; }
-            
-            .hero { height: 80vh; }
-            .hero h1 { font-size: 2.2rem; }
-            .section-padding { padding: 60px 0; }
-            
-            .gallery-container { column-count: 1; }
-            .gallery-frame { padding: 10px; border-width: 1px; }
-        }
-
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .gallery-container { column-count: 2; }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-    </style>
+    /* small tweaks */
+    .muted{color:var(--muted)}
+  </style>
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo-container">
-                    <a href="index.html">
-                        <img src="images/Amora_Logo.png" alt="AMORA by Vismaya" class="amora-logo">
-                    </a>
-                </div>
-                <nav class="main-nav" id="desktop-nav">
-                    <ul>
-                        <li><a href="index.html" class="nav-link">Home</a></li>
-                        <li><a href="#services" class="nav-link">Services</a></li>
-                        <li><a href="#vision" class="nav-link">About</a></li>
-                        <li><a href="contact.html" class="nav-link contact-btn">Contact Us</a></li>
-                    </ul>
-                </nav>
-                <button class="mobile-nav-toggle" id="mobileToggle" aria-label="Toggle Menu">&#9776;</button>
-            </nav>
-        </div>
-        <div class="mobile-menu" id="mobileMenu">
-            <a href="index.html">Home</a>
-            <a href="#services">Services</a>
-            <a href="#vision">About</a>
-            <a href="contact.html">Contact Us</a>
-        </div>
-    </header>
+  <!-- Header -->
+  <header class="site-header inner" id="siteHeader">
+    <div class="container nav">
+      <a class="brand" href="#">
+        <img src="images/Amora_Logo.png" alt="AMORA by Vismaya logo">
+        <span class="brand-text">AMORA by Vismaya</span>
+      </a>
 
-    <section class="hero">
-        <div class="hero-slider">
-            <div class="slide-item"></div>
-            <div class="slide-item"></div>
-            <div class="slide-item"></div>
+      <nav class="menu" aria-label="Main">
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+        <a href="contact.html" class="cta">Book Now</a>
+      </nav>
+
+      <button class="hamburger" id="openNav" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <!-- Floating Mobile Menu (simple) -->
+  <div id="mobileNav" style="position:fixed;inset:auto 12px 12px 12px;z-index:140;display:none">
+    <div style="background:white;border-radius:14px;padding:12px;box-shadow:0 10px 30px rgba(0,0,0,0.08)">
+      <a href="#services" style="display:block;padding:10px 8px">Services</a>
+      <a href="#gallery" style="display:block;padding:10px 8px">Gallery</a>
+      <a href="#about" style="display:block;padding:10px 8px">About</a>
+      <a href="contact.html" style="display:block;padding:10px 8px;border-radius:8px;background:var(--accent);color:white;margin-top:8px;text-align:center">Book Now</a>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero container">
+      <div class="hero-left">
+        <div class="eyebrow">Saree Draping • Palakkad</div>
+        <h1 class="hero-title">Because every saree deserves the perfect drape</h1>
+        <p class="lead">AMORA by Vismaya offers graceful, contemporary saree draping for bridesmaids, weddings and special occasions. We focus on comfort, longevity and picture-ready styling.</p>
+
+        <div class="hero-actions">
+          <a class="cta" href="contact.html">Book an Appointment</a>
+          <a class="cta secondary" href="#gallery">View Gallery</a>
         </div>
-        <div class="hero-overlay"></div>
-        
-        <div class="hero-content">
-            <h1>AMORA by Vismaya</h1>
-            <h2>Because Every Saree Deserves the Perfect Drape</h2>
-            <p style="font-size: 1.1rem; opacity: 0.9; margin-bottom: 10px;">The Best Service. The Best Styles. For Bridesmaids and Special Occasions.</p>
-            <a href="contact.html" class="cta-button">Book An Appointment</a>
+
+        <div style="margin-top:20px;color:var(--muted);font-size:0.95rem">Available across Palakkad & surrounding areas • On-location styling • Bridal-ready techniques</div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-card">
+          <img class="hero-photo" src="images/img2.png" alt="Vismaya styling a saree">
+          <div class="hero-caption">Photo: AMORA by Vismaya — Palakkad</div>
         </div>
+      </div>
     </section>
 
-    <section id="services" class="section-padding bg-grey">
-        <div class="container">
-            <div class="section-title reveal">
-                <h2>Our Services</h2>
-                <span></span>
-            </div>
-            <div class="services-grid">
-                <div class="service-card reveal">
-                    <span class="service-icon">&#10024;</span> <h3>Saree Draping</h3>
-                    <p>Graceful, contemporary draping styles tailored for weddings and events. We ensure your saree stays perfect, comfortable, and elegant all day long.</p>
-                </div>
-                <div class="service-card reveal">
-                    <span class="service-icon">&#9635;</span> <h3>Box Pleating</h3>
-                    <p>Professional pre-pleating services to make your saree wearing experience effortless and neat. Perfect for quick changes during busy events.</p>
-                </div>
-                <div class="service-card reveal">
-                    <span class="service-icon">&#128142;</span> <h3>Jewelry Setting</h3>
-                    <p>Complete your look with our expert jewelry setting service. We help style your accessories to complement your drape perfectly.</p>
-                </div>
-            </div>
+    <!-- Services -->
+    <section id="services">
+      <div class="container">
+        <div class="section-title">
+          <h2>Our Services</h2>
+          <p>Thoughtfully curated saree draping services — from bridal to bridesmaids and quick event styling.</p>
         </div>
+
+        <div class="services">
+          <div class="service">
+            <div class="icon">✨</div>
+            <div>
+              <h3>Saree Draping</h3>
+              <p>Graceful, contemporary draping styles tailored for weddings and events. We ensure your saree stays perfect and comfortable all day.</p>
+            </div>
+          </div>
+
+          <div class="service">
+            <div class="icon">🎀</div>
+            <div>
+              <h3>Box Pleating</h3>
+              <p>Neat, professional pre-pleating for quick changes and uniform looks — ideal for bridesmaids and large groups.</p>
+            </div>
+          </div>
+
+          <div class="service">
+            <div class="icon">💎</div>
+            <div>
+              <h3>Jewelry Setting</h3>
+              <p>Complete your look with professional jewelry placement and minor styling adjustments to complement the drape.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="vision" class="section-padding vision-section">
-        <div class="container">
-            <div class="section-title reveal">
-                <h2>Our Vision</h2>
-                <span></span>
-            </div>
-            <div class="vision-content reveal">
-                <p class="vision-text">At <strong>AMORA by Vismaya</strong>, our goal is to make you shine with elegance and confidence. We specialize in graceful, contemporary saree draping styles tailored for bridesmaids and special occasions.</p>
-                <p class="vision-text">Whether you're preparing for a wedding, a festive gathering, or a cherished moment, AMORA by Vismaya is your trusted companion. We believe that confidence begins with feeling beautifully put together.</p>
-                <span class="highlight-text">"Elegance is not standing out, but being remembered."</span>
-            </div>
+    <!-- Why choose AMORA -->
+    <section aria-label="Why choose AMORA">
+      <div class="container">
+        <div class="section-title">
+          <h2>Why Choose AMORA</h2>
+          <p>We blend calm professionalism with bridal-ready techniques so you look and feel confident on every special day.</p>
         </div>
+
+        <div class="why" style="flex-wrap:wrap;gap:12px;justify-content:center">
+          <div class="pill"><div style="font-size:1.1rem;color:var(--accent)">⏱</div><div><strong>Punctual & Professional</strong><small>Always on time for your schedule</small></div></div>
+          <div class="pill"><div style="font-size:1.1rem;color:var(--accent)">🧵</div><div><strong>Comfort-first Draping</strong><small>Secure pins and breathable styling</small></div></div>
+          <div class="pill"><div style="font-size:1.1rem;color:var(--accent)">🚗</div><div><strong>On-location Service</strong><small>We travel in & around Palakkad</small></div></div>
+          <div class="pill"><div style="font-size:1.1rem;color:var(--accent)">✨</div><div><strong>Custom Styling</strong><small>Looks tailored to your outfit & event</small></div></div>
+        </div>
+      </div>
     </section>
 
-    <section id="gallery" class="gallery-section">
-        <div class="container">
-            <div class="gallery-frame reveal">
-                <div class="gallery-container">
-                    <div class="gallery-item"><img src="images/img1.png" alt="Saree Style 1"></div>
-                    <div class="gallery-item"><img src="images/img2.png" alt="Saree Style 2"></div>
-                    <div class="gallery-item"><img src="images/img3.png" alt="Saree Style 3"></div>
-                    <div class="gallery-item"><img src="images/img4.png" alt="Saree Style 4"></div>
-                    <div class="gallery-item"><img src="images/img5.png" alt="Saree Style 5"></div>
-                </div>
-            </div>
+    <!-- About -->
+    <section id="about">
+      <div class="container">
+        <div class="section-title">
+          <h2>About AMORA by Vismaya</h2>
+          <p>Personal styling with a boutique approach — Vismaya brings experience and a calm, detail-oriented method to every appointment.</p>
         </div>
+
+        <div class="about">
+          <div class="portrait"><img src="images/Amora_Logo.png" alt="Vismaya - AMORA" /></div>
+          <div class="about-text">
+            <p>At <strong>AMORA by Vismaya</strong>, our goal is to make you shine with elegance and quiet confidence. We specialise in draping that photographs beautifully and feels comfortable for long ceremonies.</p>
+            <p>Whether it's a wedding, reception, photoshoot or a family function, AMORA is your trusted companion for picture-ready saree styling.</p>
+
+            <div class="signature">— Vismaya</div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 AMORA by Vismaya. All Rights Reserved.</p>
-            <p style="font-size: 0.8rem; color: #aaa;">Saree Draping | Box Pleating | Styling</p>
+    <!-- Gallery -->
+    <section id="gallery">
+      <div class="container">
+        <div class="section-title">
+          <h2>Gallery</h2>
+          <p>A glimpse of recent drapes, bridesmaid sets and event-ready looks.</p>
         </div>
-    </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- 1. Mobile Menu ---
-            const toggleBtn = document.getElementById('mobileToggle');
-            const mobileMenu = document.getElementById('mobileMenu');
-            toggleBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('active');
-                toggleBtn.innerHTML = mobileMenu.classList.contains('active') ? '&#10005;' : '&#9776;';
-            });
-            document.querySelectorAll('.mobile-menu a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.remove('active');
-                    toggleBtn.innerHTML = '&#9776;';
-                });
-            });
+        <div class="gallery-grid" id="galleryGrid">
+          <div class="gallery-item" data-src="images/img1.png"><img src="images/img1.png" alt="Saree Style 1"></div>
+          <div class="gallery-item" data-src="images/img2.png"><img src="images/img2.png" alt="Saree Style 2"></div>
+          <div class="gallery-item" data-src="images/img3.png"><img src="images/img3.png" alt="Saree Style 3"></div>
+          <div class="gallery-item" data-src="images/img4.png"><img src="images/img4.png" alt="Saree Style 4"></div>
+          <div class="gallery-item" data-src="images/img5.png"><img src="images/img5.png" alt="Saree Style 5"></div>
+          <div class="gallery-item" data-src="images/img6.png"><img src="images/img6.png" alt="Saree Style 6"></div>
+        </div>
 
-            // --- 2. Scroll Reveal ---
-            const revealElements = document.querySelectorAll('.reveal');
-            const revealOnScroll = () => {
-                const windowHeight = window.innerHeight;
-                const elementVisible = 100;
-                revealElements.forEach((element) => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    if (elementTop < windowHeight - elementVisible) {
-                        element.classList.add('active');
-                    }
-                });
-            };
-            window.addEventListener('scroll', revealOnScroll);
-            revealOnScroll();
-        });
-    </script>
+        <div style="text-align:center;margin-top:20px">
+          <a class="cta" href="gallery.html">View Full Gallery</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section aria-label="Testimonials">
+      <div class="container">
+        <div class="section-title">
+          <h2>What Clients Say</h2>
+          <p>Small touches. Big confidence. A few words from clients who've trusted AMORA.</p>
+        </div>
+
+        <div class="testimonials">
+          <div class="testimonial">
+            <p>"Vismaya made all of us bridesmaids look cohesive and comfortable. Photos came out beautiful and she was a joy to work with."</p>
+            <strong>— Anjali, Palakkad</strong>
+          </div>
+
+          <div class="testimonial">
+            <p>"On time, gentle, and extremely professional. Would recommend for any wedding events."</p>
+            <strong>— Meera</strong>
+          </div>
+
+          <div class="testimonial">
+            <p>"The pre-pleating saved us so much time — seamless changes between ceremonies."</p>
+            <strong>— Roshni</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Band -->
+    <section style="padding-bottom:46px">
+      <div class="container">
+        <div class="cta-band">
+          <div>
+            <div style="font-size:1.05rem;font-weight:700">Getting ready for an event in Palakkad?</div>
+            <div class="muted">Book AMORA by Vismaya for picture-ready saree styling.</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <a class="cta" href="contact.html">Book Your Appointment</a>
+            <a class="cta secondary" href="https://wa.me/919876543210" target="_blank">Chat on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap">
+      <div>
+        <strong>AMORA by Vismaya</strong>
+        <div class="muted" style="font-size:0.95rem">Saree Draping • Box Pleating • Styling — Palakkad</div>
+      </div>
+      <div class="socials">
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="https://wa.me/919876543210" target="_blank" aria-label="WhatsApp">WhatsApp</a>
+      </div>
+      <div class="muted">&copy; 2025 AMORA by Vismaya. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div class="modal" id="lightbox">
+    <div class="frame"><img src="" alt="" id="lightboxImg"></div>
+  </div>
+
+  <script>
+    // Header scroll behavior
+    const header = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+    });
+
+    // Mobile nav toggle
+    const openNav = document.getElementById('openNav');
+    const mobileNav = document.getElementById('mobileNav');
+    openNav.addEventListener('click', () => {
+      mobileNav.style.display = mobileNav.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // Simple lightbox for gallery
+    const modal = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const src = item.getAttribute('data-src') || item.querySelector('img').src;
+        lightboxImg.src = src;
+        modal.classList.add('open');
+      });
+    });
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('open');
+    });
+
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e){
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target){
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      });
+    });
+
+    // Simple lazy fade-in on load for subtle reveal
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.service, .gallery-item, .testimonial').forEach((el, i)=>{
+        el.style.opacity = 0;
+        setTimeout(()=> el.style.transition = 'opacity 550ms ease-out, transform 550ms ease-out', 20);
+        setTimeout(()=>{ el.style.opacity = 1; el.style.transform = 'translateY(0)'; }, 120 + i*80);
+      });
+    });
+  </script>
 </body>
 </html>
