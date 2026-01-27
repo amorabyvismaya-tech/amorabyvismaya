@@ -1,429 +1,236 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AMORA by Vismaya — Saree Draping Services, Palakkad</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMORA by Vismaya | Home</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-  <!-- Favicon -->
-  <link rel="icon" href="images/logo.png" type="image/png" />
+    <style>
+        :root {
+            --sidebar-bg: #1B2631;
+            --content-bg: #F5F0E6;
+            --accent: #D35400;
+            --text-main: #2C3E50;
+            --text-light: #BDC3C7;
+            --sidebar-width: 280px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--content-bg);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+        }
+        h1, h2, h3, h4, h5 { font-family: 'Cormorant Garamond', serif; font-weight: 500; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        img { width: 100%; display: block; }
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+        /* SIDEBAR */
+        .sidebar {
+            width: var(--sidebar-width); height: 100vh; background-color: var(--sidebar-bg); color: #fff;
+            position: fixed; left: 0; top: 0; display: flex; flex-direction: column; justify-content: space-between;
+            padding: 40px; z-index: 1000;
+            background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px; background-blend-mode: overlay; opacity: 0.99;
+        }
+        
+        .brand-logo { width: 100%; max-width: 180px; height: auto; margin-bottom: 20px; }
+        .nav-menu { display: flex; flex-direction: column; gap: 25px; }
+        .nav-menu a { font-size: 1.1rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; position: relative; padding-left: 0; transition: 0.4s; }
+        .nav-menu a:hover, .nav-menu a.active { color: #fff; padding-left: 20px; }
+        .nav-menu a::before { content: ''; position: absolute; left: 0; top: 50%; width: 0; height: 1px; background: var(--accent); transition: 0.3s; }
+        .nav-menu a:hover::before { width: 15px; }
+        .sidebar-footer p { font-size: 0.8rem; opacity: 0.6; margin-top: 10px; }
+        
+        .socials { display: flex; align-items: center; }
+        .socials a { color: #fff; margin-right: 15px; font-size: 1.1rem; transition: 0.3s; }
+        .socials a:hover { color: var(--accent); transform: translateY(-2px); }
 
-  <style>
-    /* ----------------------
-       Design tokens
-    ---------------------- */
-    :root{
-      --bg:#fff8f4;
-      --panel:#ffffff;
-      --muted:#777777;
-      --text:#1d1d1f;
-      --accent:#cba44b; /* warm gold */
-      --accent-600:#b58f36;
-      --radius:12px;
-      --container:1200px;
-      --glass: rgba(255,255,255,0.6);
-    }
+        /* CONTENT */
+        .main-content { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); padding: 0; }
+        
+        /* MOBILE HEADER */
+        .mobile-header { display: none; position: fixed; top: 0; left: 0; right: 0; height: 70px; background: var(--sidebar-bg); color: #fff; z-index: 2000; align-items: center; justify-content: space-between; padding: 0 20px; }
+        .mobile-logo { max-height: 40px; width: auto; }
 
-    /* Reset */
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,'Helvetica Neue',Arial; color:var(--text); background:linear-gradient(180deg,#fff 0%,var(--bg) 100%); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
-    img{max-width:100%;display:block}
-    a{color:inherit;text-decoration:none}
+        /* HERO SECTION */
+        .hero { 
+            min-height: 100vh; 
+            display: grid; 
+            grid-template-columns: 40% 60%; 
+            /* Align-items: stretch ensures both columns are equal height */
+            align-items: stretch; 
+            position: relative; 
+            overflow: hidden; 
+        }
 
-    /* Container */
-    .container{max-width:var(--container);margin:0 auto;padding:0 20px}
+        /* --- UPDATED: Text Alignment --- */
+        .hero-text { 
+            padding: 60px; 
+            z-index: 2; 
+            display: flex; 
+            flex-direction: column; 
+            /* Top padding ensures the Tagline aligns visually with the Sidebar Menu */
+            padding-top: 140px; 
+            justify-content: flex-start; /* Aligns content to top */
+        }
+        
+        .hero-intro { margin-bottom: 40px; }
+        .hero-intro h5 { 
+            font-size: 2.8rem; /* Big Tagline */
+            font-weight: 700; 
+            color: var(--accent); 
+            font-style: italic; 
+            line-height: 1.1;
+            margin-bottom: 20px; 
+        }
+        .hero-intro p { 
+            font-size: 1.1rem; 
+            color: #444; 
+            line-height: 1.6; 
+            max-width: 95%; 
+            font-weight: 500;
+        }
 
-    /* ----------------------
-       Header
-    ---------------------- */
-    header.site-header{position:fixed;left:0;right:0;top:0;z-index:60;padding:22px 0;transition:all 0.35s ease}
-    header.site-header.inner{background:transparent}
-    header.site-header.scrolled{backdrop-filter:blur(6px);background:rgba(255,255,255,0.85);box-shadow:0 6px 24px rgba(13,12,11,0.06)}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .brand{display:flex;align-items:center;gap:14px}
-    .brand img{height:46px;width:auto}
-    .brand .brand-text{font-family:Playfair Display,serif;font-weight:700;font-size:1.05rem;letter-spacing:0.6px}
+        .hero-text h2 { font-size: 2.5rem; line-height: 1; margin-bottom: 20px; color: var(--sidebar-bg); opacity: 0.9; }
+        .hero-text p.lead { font-size: 1rem; margin-bottom: 30px; color: #666; border-left: 3px solid var(--accent); padding-left: 20px; }
+        
+        /* Hero Image Container */
+        .hero-image { 
+            height: auto; 
+            position: relative; 
+            min-height: 100vh; 
+        }
+        .hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 
-    .menu{display:flex;gap:28px;align-items:center}
-    .menu a{font-weight:600;font-size:0.95rem;color:var(--text);opacity:0.9;padding:6px 8px;border-radius:8px}
-    .menu a:hover{color:var(--accent);}
+        /* --- UPDATED: Badge Position (Centered) --- */
+        .hero-badge { 
+            position: absolute; 
+            top: 50%; /* Moves top edge to 50% */
+            transform: translateY(-50%); /* Shifts it back up by half its height to center perfectly */
+            left: -50px; 
+            background: #fff; 
+            padding: 30px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+            max-width: 250px; 
+            z-index: 3; 
+        }
+        .hero-badge h4 { color: var(--accent); font-size: 1.2rem; margin-bottom: 5px; }
 
-    .cta{background:var(--accent);color:white;padding:10px 18px;border-radius:999px;font-weight:700;box-shadow:0 8px 20px rgba(203,164,75,0.18)}
-    .cta.secondary{background:transparent;color:var(--text);border:1px solid rgba(29,29,31,0.06)}
+        /* BUTTON */
+        .btn-modern { display: inline-block; padding: 15px 40px; background: var(--sidebar-bg); color: #fff; letter-spacing: 2px; font-size: 0.8rem; text-transform: uppercase; border: none; margin-top: 20px; position: relative; overflow: hidden; width: fit-content; }
+        .btn-modern::after { content: ''; position: absolute; top: 0; left: 0; width: 0%; height: 100%; background: var(--accent); transition: 0.3s; z-index: 0; }
+        .btn-modern span { position: relative; z-index: 1; }
+        .btn-modern:hover::after { width: 100%; }
 
-    /* Mobile nav */
-    .hamburger{display:none;border:0;background:none;font-size:22px}
-
-    /* ----------------------
-       Hero (Cinematic)
-    ---------------------- */
-    .hero{min-height:82vh;display:grid;grid-template-columns:1fr 520px;align-items:center;padding:90px 0 60px;gap:40px}
-    .hero-left{max-width:720px}
-    .eyebrow{font-size:0.9rem;color:var(--muted);margin-bottom:10px}
-    h1.hero-title{font-family:Playfair Display,serif;font-size:3.1rem;margin-bottom:12px;line-height:1.02}
-    p.lead{color:var(--muted);font-size:1.05rem;margin-bottom:20px}
-    .hero-actions{display:flex;gap:12px;align-items:center}
-
-    .hero-right{position:relative;align-self:stretch}
-    .hero-card{height:100%;border-radius:18px;overflow:hidden;box-shadow:0 18px 48px rgba(12,10,9,0.12);background:linear-gradient(180deg,rgba(0,0,0,0.03),rgba(255,255,255,0.03));}
-    .hero-photo{height:100%;object-fit:cover;width:100%;display:block}
-
-    /* subtle hero caption */
-    .hero-caption{position:absolute;left:18px;bottom:18px;background:linear-gradient(90deg,rgba(0,0,0,0.45),rgba(0,0,0,0.18));color:white;padding:8px 12px;border-radius:10px;font-size:0.9rem}
-
-    /* ----------------------
-       Sections
-    ---------------------- */
-    section{padding:72px 0}
-    .section-title{display:flex;flex-direction:column;align-items:center;margin-bottom:42px}
-    .section-title h2{font-family:Playfair Display,serif;font-size:1.8rem;margin-bottom:8px}
-    .section-title p{color:var(--muted);font-size:0.98rem;text-align:center;max-width:760px}
-
-    /* Services: horizontal cards */
-    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .service{background:var(--panel);border-radius:14px;padding:22px;display:flex;gap:16px;align-items:flex-start;box-shadow:0 6px 28px rgba(16,14,13,0.04);transition:transform .28s ease}
-    .service:hover{transform:translateY(-8px)}
-    .service .icon{height:56px;width:56px;border-radius:12px;background:linear-gradient(180deg,rgba(203,164,75,0.12),rgba(203,164,75,0.06));display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--accent)}
-    .service h3{margin-bottom:6px;font-size:1.05rem}
-    .service p{color:var(--muted);font-size:0.95rem}
-
-    /* Why choose (strip) */
-    .why{display:flex;gap:14px;justify-content:center;align-items:center}
-    .why .pill{background:linear-gradient(180deg,#fff,#fff);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 28px rgba(10,10,12,0.04)}
-    .why .pill strong{display:block}
-    .why .pill small{display:block;color:var(--muted);font-size:0.88rem}
-
-    /* About split */
-    .about{display:grid;grid-template-columns:360px 1fr;gap:28px;align-items:center}
-    .about .portrait{border-radius:16px;overflow:hidden;border:6px solid rgba(203,164,75,0.09)}
-    .about .about-text p{color:var(--muted);line-height:1.7}
-    .signature{font-family:Playfair Display,serif;color:var(--accent-600);font-size:1.1rem;margin-top:12px}
-
-    /* Gallery masonry (CSS columns fallback) */
-    .gallery-grid{column-count:3;column-gap:16px}
-    .gallery-item{break-inside:avoid;margin-bottom:14px;border-radius:10px;overflow:hidden;box-shadow:0 8px 28px rgba(8,7,7,0.06);cursor:pointer;transition:transform .28s ease}
-    .gallery-item:hover{transform:translateY(-6px)}
-
-    /* Testimonials */
-    .testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .testimonial{background:var(--panel);padding:18px;border-radius:12px;box-shadow:0 8px 24px rgba(9,8,8,0.04)}
-    .testimonial p{color:var(--muted);font-size:0.95rem}
-    .testimonial strong{display:block;margin-top:10px}
-
-    /* CTA band */
-    .cta-band{background:linear-gradient(90deg,#fff7f0 0%,#fffaf7 100%);border-radius:18px;padding:26px;display:flex;align-items:center;justify-content:space-between;gap:18px;border:1px solid rgba(203,164,75,0.06)}
-
-    /* Footer */
-    footer.site-footer{padding:36px 0;border-top:1px solid rgba(16,14,12,0.03);color:var(--muted)}
-    .socials{display:flex;gap:12px}
-
-    /* ----------------------
-       Lightbox modal
-    ---------------------- */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:150;opacity:0;pointer-events:none;transition:opacity .2s ease}
-    .modal.open{opacity:1;pointer-events:auto}
-    .modal .frame{max-width:90vw;max-height:86vh;border-radius:12px;overflow:hidden}
-    .modal img{display:block;width:100%;height:auto}
-
-    /* ----------------------
-       Responsive
-    ---------------------- */
-    @media (max-width:1024px){
-      .hero{grid-template-columns:1fr 420px;padding-top:110px}
-      .services{grid-template-columns:repeat(2,1fr)}
-      .gallery-grid{column-count:2}
-      .testimonials{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width:760px){
-      header.site-header{padding:14px 0}
-      .menu{display:none}
-      .hamburger{display:block}
-      .hero{grid-template-columns:1fr;padding:120px 0 40px}
-      .hero-right{order:-1;margin-bottom:18px}
-      .gallery-grid{column-count:1}
-      .about{grid-template-columns:1fr}
-      .services{grid-template-columns:1fr}
-      .testimonials{grid-template-columns:1fr}
-    }
-
-    /* small tweaks */
-    .muted{color:var(--muted)}
-  </style>
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            :root { --sidebar-width: 0px; }
+            .mobile-header { display: flex; }
+            .sidebar { transform: translateX(-100%); width: 280px; transition: transform 0.4s ease; box-shadow: 5px 0 15px rgba(0,0,0,0.2); }
+            .sidebar.active { transform: translateX(0); }
+            .main-content { margin-left: 0; width: 100%; margin-top: 70px; }
+            
+            .hero { grid-template-columns: 1fr; height: auto; min-height: auto; display: flex; flex-direction: column; } 
+            
+            /* Order: Image First on Mobile? Or Text? Usually text first for hierarchy, but images look nice. 
+               Let's keep image first so the badge is seen. */
+            .hero-image { height: 400px; min-height: 0; order: 1; width: 100%; }
+            .hero-image img { height: 100%; width: 100%; object-fit: cover; }
+            
+            /* Mobile Badge Adjustment */
+            .hero-badge { 
+                top: auto; 
+                bottom: -20px; 
+                transform: none;
+                left: 20px; 
+                right: 20px; 
+                max-width: none; 
+            }
+            
+            .hero-text { order: 2; padding: 50px 20px; padding-top: 40px; }
+            .hero-intro h5 { font-size: 2.2rem; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="site-header inner" id="siteHeader">
-    <div class="container nav">
-      <a class="brand" href="#">
-        <img src="images/logo1.png" alt="AMORA by Vismaya logo">
-        <span class="brand-text"> </span>
-      </a>
-
-      <nav class="menu" aria-label="Main">
-        <a href="#services">Services</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#about">About</a>
-        <a href="contact.html" class="cta">Book Now</a>
-      </nav>
-
-      <button class="hamburger" id="openNav" aria-label="Open menu">☰</button>
+    <div class="mobile-header">
+        <div class="brand">
+            <img src="images/logo.png" alt="AMORA" class="mobile-logo">
+        </div>
+        <div onclick="toggleMenu()" style="font-size: 1.5rem; cursor: pointer;">
+            <i class="fas fa-bars"></i>
+        </div>
     </div>
-  </header>
 
-  <!-- Floating Mobile Menu (simple) -->
-  <div id="mobileNav" style="position:fixed;inset:auto 12px 12px 12px;z-index:140;display:none">
-    <div style="background:white;border-radius:14px;padding:12px;box-shadow:0 10px 30px rgba(0,0,0,0.08)">
-      <a href="#services" style="display:block;padding:10px 8px">Services</a>
-      <a href="#gallery" style="display:block;padding:10px 8px">Gallery</a>
-      <a href="#about" style="display:block;padding:10px 8px">About</a>
-      <a href="contact.html" style="display:block;padding:10px 8px;border-radius:8px;background:var(--accent);color:white;margin-top:8px;text-align:center">Book Now</a>
-    </div>
-  </div>
-
-  <!-- Hero -->
-  <main>
-    <section class="hero container">
-      <div class="hero-left">
-        <div class="eyebrow">Saree Draping • Palakkad</div>
-        <h1 class="hero-title">Because every saree deserves the perfect drape</h1>
-        <p class="lead">AMORA by Vismaya offers graceful, contemporary saree draping for bridesmaids, weddings and special occasions. We focus on comfort, longevity and picture-ready styling.</p>
-
-        <div class="hero-actions">
-          <a class="cta" href="contact.html">Book an Appointment</a>
-          <a class="cta secondary" href="#gallery">View Gallery</a>
-        </div>
-
-        <div style="margin-top:20px;color:var(--muted);font-size:0.95rem">Available across Palakkad & surrounding areas • On-location styling • Bridal-ready techniques</div>
-      </div>
-
-      <div class="hero-right">
-        <div class="hero-card">
-          <img class="hero-photo" src="images/img2.png" alt="Vismaya styling a saree">
-          
-        </div>
-      </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services">
-      <div class="container">
-        <div class="section-title">
-          <h2>Our Services</h2>
-          <p>Thoughtfully curated saree draping services — from bridal to bridesmaids and quick event styling.</p>
-        </div>
-
-        <div class="services">
-          <div class="service">
-            <div class="icon">✨</div>
-            <div>
-              <h3>Saree Draping</h3>
-              <p>Graceful, contemporary draping styles tailored for weddings and events. We ensure your saree stays perfect and comfortable all day.</p>
+    <nav class="sidebar" id="sidebar">
+        <div>
+            <div class="brand">
+                <img src="images/logo.png" alt="AMORA" class="brand-logo">
             </div>
-          </div>
-
-          <div class="service">
-            <div class="icon">🎀</div>
-            <div>
-              <h3>Box Pleating</h3>
-              <p>Neat, professional pre-pleating for quick changes and uniform looks — ideal for bridesmaids and large groups.</p>
+            <br>
+            <div class="nav-menu">
+                <a href="index.html" class="active">Home</a>
+                <a href="services/index.html">Services</a>
+                <a href="gallery/index.html">Reviews</a>
+                <a href="about/index.html">About Amora</a>
+                <a href="booknow/index.html">Contact</a>
             </div>
-          </div>
-
-          <div class="service">
-            <div class="icon">💎</div>
-            <div>
-              <h3>Jewelry Setting</h3>
-              <p>Complete your look with professional jewelry placement and minor styling adjustments to complement the drape.</p>
+        </div>
+        
+        <div class="sidebar-footer">
+            <div class="socials">
+                <a href="https://www.instagram.com/amorabyvismaya/" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/919447193346" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="mailto:amorabyvismaya@gmail.com" title="Email">
+                    <i class="far fa-envelope"></i>
+                </a>
             </div>
-          </div>
+            <p>&copy; 2024 Amora</p>
         </div>
-      </div>
-    </section>
+    </nav>
 
-    <!-- Why choose AMORA -->
-    <section aria-label="Why choose AMORA">
-      <div class="container">
-        <div class="section-title">
-          <h2>Why Choose AMORA</h2>
-          <p>We blend calm professionalism with bridal-ready techniques so you look and feel confident on every special day.</p>
-        </div>
+    <main class="main-content">
+        <section class="hero">
+            <div class="hero-text">
+                <div class="hero-intro">
+                    <h5>Because every saree deserves the perfect drape</h5>
+                    <p>AMORA by Vismaya offers graceful, contemporary saree draping for bridesmaids, weddings and special occasions. We focus on comfort, longevity and picture-ready styling.</p>
+                </div>
 
-        <div class="why" style="flex-wrap:wrap;gap:12px;justify-content:center">
-          <div class="pill"><div style="font-size:1.1rem;color:var(--accent)">⏱</div><div><strong>Punctual & Professional</strong><small>Always on time for your schedule</small></div></div>
-          <div class="pill"><div style="font-size:1.1rem;color:var(--accent)">🧵</div><div><strong>Comfort-first Draping</strong><small>Secure pins and breathable styling</small></div></div>
-          <div class="pill"><div style="font-size:1.1rem;color:var(--accent)">🚗</div><div><strong>On-location Service</strong><small>We travel in & around Palakkad</small></div></div>
-          <div class="pill"><div style="font-size:1.1rem;color:var(--accent)">✨</div><div><strong>Custom Styling</strong><small>Looks tailored to your outfit & event</small></div></div>
-        </div>
-      </div>
-    </section>
+                <h2>The Silhouette <br>of Tradition</h2>
+                <p class="lead">Amora brings the finesse of editorial styling to your wedding day. Expert draping services that ensure every pleat tells a story.</p>
+                <a href="booknow/index.html" class="btn-modern"><span>Book Appointment</span></a>
+            </div>
+            
+            <div class="hero-image">
+                <img src="images/img2.png" alt="Amora Styling">
+                <div class="hero-badge">
+                    <h4>Vismaya's Signature</h4>
+                    <p style="font-size: 0.9rem; color: #777;">Pre-pleated perfection. <br>Ready in 2 minutes.</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    <!-- About -->
-    <section id="about">
-      <div class="container">
-        <div class="section-title">
-          <h2>About AMORA by Vismaya</h2>
-          <p>Personal styling with a boutique approach — Vismaya brings experience and a calm, detail-oriented method to every appointment.</p>
-        </div>
-
-        <div class="about">
-          <div class="portrait"><img src="images/Amora_Logo.png" alt="Vismaya - AMORA" /></div>
-          <div class="about-text">
-            <p>At <strong>AMORA by Vismaya</strong>, our goal is to make you shine with elegance and quiet confidence. We specialise in draping that photographs beautifully and feels comfortable for long ceremonies.</p>
-            <p>Whether it's a wedding, reception, photoshoot or a family function, AMORA is your trusted companion for picture-ready saree styling.</p>
-
-            <div class="signature">— Vismaya</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Gallery -->
-    <section id="gallery">
-      <div class="container">
-        <div class="section-title">
-          <h2>Gallery</h2>
-          <p>A glimpse of recent drapes, bridesmaid sets and event-ready looks.</p>
-        </div>
-
-        <div class="gallery-grid" id="galleryGrid">
-          <div class="gallery-item" data-src="images/img1.png"><img src="images/img1.png" alt="Saree Style 1"></div>
-          <div class="gallery-item" data-src="images/img2.png"><img src="images/img2.png" alt="Saree Style 2"></div>
-          <div class="gallery-item" data-src="images/img3.png"><img src="images/img3.png" alt="Saree Style 3"></div>
-          <div class="gallery-item" data-src="images/img4.png"><img src="images/img4.png" alt="Saree Style 4"></div>
-          <div class="gallery-item" data-src="images/img5.png"><img src="images/img5.png" alt="Saree Style 5"></div>
-          <div class="gallery-item" data-src="images/img6.png"><img src="images/img6.png" alt="Saree Style 6"></div>
-        </div>
-
-        <div style="text-align:center;margin-top:20px">
-          <a class="cta" href="gallery.html">View Full Gallery</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section aria-label="Testimonials">
-      <div class="container">
-        <div class="section-title">
-          <h2>What Clients Say</h2>
-          <p>Small touches. Big confidence. A few words from clients who've trusted AMORA.</p>
-        </div>
-
-        <div class="testimonials">
-          <div class="testimonial">
-            <p>"Vismaya made all of us bridesmaids look cohesive and comfortable. Photos came out beautiful and she was a joy to work with."</p>
-            <strong>— Anjali, Palakkad</strong>
-          </div>
-
-          <div class="testimonial">
-            <p>"On time, gentle, and extremely professional. Would recommend for any wedding events."</p>
-            <strong>— Meera</strong>
-          </div>
-
-          <div class="testimonial">
-            <p>"The pre-pleating saved us so much time — seamless changes between ceremonies."</p>
-            <strong>— Roshni</strong>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Band -->
-    <section style="padding-bottom:46px">
-      <div class="container">
-        <div class="cta-band">
-          <div>
-            <div style="font-size:1.05rem;font-weight:700">Getting ready for an event in Palakkad?</div>
-            <div class="muted">Book AMORA by Vismaya for picture-ready saree styling.</div>
-          </div>
-          <div style="display:flex;gap:10px;align-items:center">
-            <a class="cta" href="contact.html">Book Your Appointment</a>
-            <a class="cta secondary" href="https://wa.me/919447193346" target="_blank">Chat on WhatsApp</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap">
-      <div>
-        <strong>AMORA by Vismaya</strong>
-        <div class="muted" style="font-size:0.95rem">Saree Draping • Box Pleating • Styling — Palakkad</div>
-      </div>
-      <div class="socials">
-        <a href="https://www.instagram.com/amorabyvismaya/" target="_blank" aria-label="Instagram">Instagram</a>
-        <a href="https://wa.me/919447193346" target="_blank" aria-label="WhatsApp">WhatsApp</a>
-      </div>
-      <div class="muted">&copy; 2025 AMORA by Vismaya. All rights reserved.</div>
-    </div>
-  </footer>
-
-  <!-- Lightbox Modal -->
-  <div class="modal" id="lightbox">
-    <div class="frame"><img src="" alt="" id="lightboxImg"></div>
-  </div>
-
-  <script>
-    // Header scroll behavior
-    const header = document.getElementById('siteHeader');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 20) header.classList.add('scrolled');
-      else header.classList.remove('scrolled');
-    });
-
-    // Mobile nav toggle
-    const openNav = document.getElementById('openNav');
-    const mobileNav = document.getElementById('mobileNav');
-    openNav.addEventListener('click', () => {
-      mobileNav.style.display = mobileNav.style.display === 'none' ? 'block' : 'none';
-    });
-
-    // Simple lightbox for gallery
-    const modal = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-    document.querySelectorAll('.gallery-item').forEach(item => {
-      item.addEventListener('click', () => {
-        const src = item.getAttribute('data-src') || item.querySelector('img').src;
-        lightboxImg.src = src;
-        modal.classList.add('open');
-      });
-    });
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.classList.remove('open');
-    });
-
-    // Smooth scroll for internal links
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', function(e){
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target){
-          e.preventDefault();
-          target.scrollIntoView({behavior:'smooth',block:'start'});
+    <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            } else {
+                sidebar.classList.add('active');
+            }
         }
-      });
-    });
-
-    // Simple lazy fade-in on load for subtle reveal
-    window.addEventListener('load', () => {
-      document.querySelectorAll('.service, .gallery-item, .testimonial').forEach((el, i)=>{
-        el.style.opacity = 0;
-        setTimeout(()=> el.style.transition = 'opacity 550ms ease-out, transform 550ms ease-out', 20);
-        setTimeout(()=>{ el.style.opacity = 1; el.style.transform = 'translateY(0)'; }, 120 + i*80);
-      });
-    });
-  </script>
+    </script>
 </body>
 </html>
-
-
-
-
-
-
