@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMORA by Vismaya | Services</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --sidebar-bg: #1B2631;
+            --content-bg: #F5F0E6;
+            --accent: #D35400;
+            --text-main: #2C3E50;
+            --text-light: #BDC3C7;
+            --sidebar-width: 280px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--content-bg);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+        }
+        h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 500; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        
+        /* Standard img reset */
+        img { width: 100%; display: block; }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: var(--sidebar-width); height: 100vh; background-color: var(--sidebar-bg); color: #fff;
+            position: fixed; left: 0; top: 0; display: flex; flex-direction: column; justify-content: space-between;
+            padding: 40px; z-index: 1000;
+            background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px; background-blend-mode: overlay; opacity: 0.99;
+        }
+
+        /* --- Brand Logo Styling --- */
+        .brand-logo {
+            width: 100%;
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .nav-menu { display: flex; flex-direction: column; gap: 25px; }
+        .nav-menu a { font-size: 1.1rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; position: relative; padding-left: 0; transition: 0.4s; }
+        .nav-menu a:hover, .nav-menu a.active { color: #fff; padding-left: 20px; }
+        .nav-menu a::before { content: ''; position: absolute; left: 0; top: 50%; width: 0; height: 1px; background: var(--accent); transition: 0.3s; }
+        .nav-menu a:hover::before { width: 15px; }
+        
+        .sidebar-footer p { font-size: 0.8rem; opacity: 0.6; margin-top: 10px; }
+        
+        /* --- Socials Styling --- */
+        .socials { display: flex; align-items: center; }
+        .socials a {
+            color: #fff;
+            margin-right: 15px;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+        .socials a:hover { color: var(--accent); transform: translateY(-2px); }
+
+        .main-content { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); padding: 0; }
+        
+        /* MOBILE HEADER */
+        .mobile-header { display: none; position: fixed; top: 0; left: 0; right: 0; height: 70px; background: var(--sidebar-bg); color: #fff; z-index: 2000; align-items: center; justify-content: space-between; padding: 0 20px; }
+        
+        /* Mobile Logo */
+        .mobile-logo {
+            max-height: 40px;
+            width: auto;
+        }
+
+        /* SERVICES SPECIFIC CSS */
+        .services { padding: 100px 80px; background: #fff; min-height: 100vh; }
+        .section-header { font-size: 3rem; margin-bottom: 60px; position: relative; display: inline-block; }
+        .section-header::after { content: ''; position: absolute; right: -60px; top: 50%; width: 40px; height: 2px; background: var(--accent); }
+        
+        .service-list { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+        .service-item { border-bottom: 1px solid #eee; padding-bottom: 30px; transition: 0.3s; }
+        .service-item:hover { transform: translateY(-5px); }
+        
+        /* --- IMAGE & SLIDESHOW STYLING --- */
+        .service-img-container {
+            width: 100%;
+            height: 300px; /* Fixed height for uniformity */
+            overflow: hidden;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            position: relative;
+            background-color: #f0f0f0;
+        }
+
+        .service-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Logic for Slideshows */
+        .slideshow img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0; /* Hidden by default */
+        }
+
+        /* Animation for 2 Images (Box Folding) */
+        .slide-2 img {
+            animation: fade2 6s infinite; 
+        }
+        .slide-2 img:nth-child(1) { animation-delay: 0s; }
+        .slide-2 img:nth-child(2) { animation-delay: 3s; }
+
+        @keyframes fade2 {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            50% { opacity: 1; }
+            60% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        /* Animation for 3 Images (Party Edit) */
+        .slide-3 img {
+            animation: fade3 9s infinite;
+        }
+        .slide-3 img:nth-child(1) { animation-delay: 0s; }
+        .slide-3 img:nth-child(2) { animation-delay: 3s; }
+        .slide-3 img:nth-child(3) { animation-delay: 6s; }
+
+        @keyframes fade3 {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            33% { opacity: 1; }
+            43% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        .service-item h3 { font-size: 1.8rem; margin-bottom: 15px; color: var(--sidebar-bg); }
+        .service-item p { font-size: 0.95rem; color: #666; line-height: 1.7; }
+        .price { display: block; margin-top: 15px; font-weight: 700; color: var(--accent); font-family: 'Montserrat', sans-serif; font-size: 0.9rem; }
+
+        @media (max-width: 900px) {
+            :root { --sidebar-width: 0px; }
+            .mobile-header { display: flex; }
+            .sidebar { transform: translateX(-100%); width: 280px; transition: transform 0.4s ease; box-shadow: 5px 0 15px rgba(0,0,0,0.2); }
+            .sidebar.active { transform: translateX(0); }
+            .main-content { margin-left: 0; width: 100%; margin-top: 70px; }
+            .services { padding: 60px 20px; }
+            .service-list { grid-template-columns: 1fr; gap: 40px; }
+            .service-img-container { height: 250px; } /* Smaller images on mobile */
+            h2 { font-size: 2.5rem !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-header">
+        <div class="brand">
+            <img src="../images/logo.png" alt="AMORA" class="mobile-logo">
+        </div>
+        <div onclick="toggleMenu()" style="font-size: 1.5rem; cursor: pointer;">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+
+    <nav class="sidebar" id="sidebar">
+        <div>
+            <div class="brand">
+                <img src="../images/logo.png" alt="AMORA" class="brand-logo">
+            </div>
+            <br>
+            <div class="nav-menu">
+                <a href="../index.html">Home</a>
+                <a href="#" class="active">Services</a>
+                <a href="../gallery/index.html">Reviews</a>
+                <a href="../about/index.html">About Amora</a>
+                <a href="../booknow/index.html">Contact</a>
+            </div>
+        </div>
+        
+        <div class="sidebar-footer">
+            <div class="socials">
+                <a href="https://www.instagram.com/amorabyvismaya/" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/919447193346" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="mailto:amorabyvismaya@gmail.com" title="Email">
+                    <i class="far fa-envelope"></i>
+                </a>
+            </div>
+            <p>&copy; 2024 Amora</p>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="services">
+            <h2 class="section-header">Service Menu</h2>
+            <div class="service-list">
+                
+                <div class="service-item">
+                    <div class="service-img-container">
+                        <img src="../images/img2.png" alt="Bridesmaids Drape">
+                    </div>
+                    <h3>01. The Bridesmaids Drape</h3>
+                    <p>On-location styling for the bridesmaids. Includes jewellery setting and veil fixing. </p>
+                    <span class="price">Custom Quote</span>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-img-container slideshow slide-2">
+                        <img src="../images/img4.png" alt="Box Folding 1">
+                        <img src="../images/img5.png" alt="Box Folding 2">
+                    </div>
+                    <h3>02. Box Folding</h3>
+                    <p>Send us your sarees, and we return them ironed, pleated, and pinned to your measurements. Just wrap, hook, and throw the pallu.</p>
+                    <span class="price">Custom Quote</span>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-img-container slideshow slide-3">
+                        <img src="../images/bg1.png" alt="Party Edit 1">
+                        <img src="../images/bg2.png" alt="Party Edit 2">
+                        <img src="../images/bg3.png" alt="Party Edit 3">
+                    </div>
+                    <h3>03. The Party Edit</h3>
+                    <p>Modern silhouettes for Sangeet and Cocktails. Mermaid drapes, Dhoti style, and Belted drapes for ease of movement.</p>
+                    <span class="price">Custom Quote</span>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-img-container">
+                        <img src="../images/fam.png" alt="Group Package">
+                    </div>
+                    <h3>04. Group Packages</h3>
+                    <p>Efficient draping for bridesmaids and family members. Ensure the whole squad looks uniform and crisp.</p>
+                    <span class="price">Custom Quote</span>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

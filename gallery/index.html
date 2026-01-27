@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMORA by Vismaya | Reviews</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root { --sidebar-bg: #1B2631; --content-bg: #F5F0E6; --accent: #D35400; --text-main: #2C3E50; --text-light: #BDC3C7; --sidebar-width: 280px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--content-bg); color: var(--text-main); display: flex; min-height: 100vh; }
+        h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 500; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        
+        /* Standard img reset */
+        img { width: 100%; display: block; }
+        
+        /* SIDEBAR */
+        .sidebar { width: var(--sidebar-width); height: 100vh; background-color: var(--sidebar-bg); color: #fff; position: fixed; left: 0; top: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 40px; z-index: 1000; background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px; background-blend-mode: overlay; opacity: 0.99; }
+        
+        /* --- Brand Logo Styling --- */
+        .brand-logo {
+            width: 100%;
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .nav-menu { display: flex; flex-direction: column; gap: 25px; }
+        .nav-menu a { font-size: 1.1rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; position: relative; padding-left: 0; transition: 0.4s; }
+        .nav-menu a:hover, .nav-menu a.active { color: #fff; padding-left: 20px; }
+        .nav-menu a::before { content: ''; position: absolute; left: 0; top: 50%; width: 0; height: 1px; background: var(--accent); transition: 0.3s; }
+        .nav-menu a:hover::before { width: 15px; }
+        
+        .sidebar-footer p { font-size: 0.8rem; opacity: 0.6; margin-top: 10px; }
+        
+        /* --- Socials Styling --- */
+        .socials { display: flex; align-items: center; }
+        .socials a {
+            color: #fff;
+            margin-right: 15px;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+        .socials a:hover { color: var(--accent); transform: translateY(-2px); }
+
+        .main-content { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); padding: 0; }
+        
+        /* MOBILE HEADER */
+        .mobile-header { display: none; position: fixed; top: 0; left: 0; right: 0; height: 70px; background: var(--sidebar-bg); color: #fff; z-index: 2000; align-items: center; justify-content: space-between; padding: 0 20px; }
+        
+        /* Mobile Logo */
+        .mobile-logo {
+            max-height: 40px;
+            width: auto;
+        }
+
+        /* REVIEWS SPECIFIC CSS */
+        .reviews-section { padding: 100px 80px; background: var(--content-bg); min-height: 100vh; }
+        .section-header { font-size: 3rem; margin-bottom: 60px; position: relative; display: inline-block; }
+        .section-header::after { content: ''; position: absolute; right: -60px; top: 50%; width: 40px; height: 2px; background: var(--accent); }
+        
+        /* Grid Layout for Reviews */
+        .reviews-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 40px; 
+            margin-top: 20px;
+        }
+
+        /* Review Card Style */
+        .review-card {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+            transition: 0.3s;
+            border-top: 4px solid var(--accent); /* Brand Accent Top Border */
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+
+        /* Quote Icon styling */
+        .quote-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            opacity: 0.3;
+            margin-bottom: 20px;
+            font-family: serif;
+        }
+
+        .review-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--sidebar-bg);
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            display: block;
+        }
+
+        @media (max-width: 900px) {
+            :root { --sidebar-width: 0px; }
+            .mobile-header { display: flex; }
+            .sidebar { transform: translateX(-100%); width: 280px; transition: transform 0.4s ease; box-shadow: 5px 0 15px rgba(0,0,0,0.2); }
+            .sidebar.active { transform: translateX(0); }
+            .main-content { margin-left: 0; width: 100%; margin-top: 70px; }
+            .reviews-section { padding: 60px 20px; }
+            .reviews-grid { grid-template-columns: 1fr; gap: 30px; } /* Stack vertically on mobile */
+            h2 { font-size: 2.5rem !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-header">
+        <div class="brand">
+            <img src="../images/logo.png" alt="AMORA" class="mobile-logo">
+        </div>
+        <div onclick="toggleMenu()" style="font-size: 1.5rem; cursor: pointer;">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+
+    <nav class="sidebar" id="sidebar">
+        <div>
+            <div class="brand">
+                <img src="../images/logo.png" alt="AMORA" class="brand-logo">
+            </div>
+            <br>
+            <div class="nav-menu">
+                <a href="../index.html">Home</a>
+                <a href="../services/index.html">Services</a>
+                <a href="#" class="active">Reviews</a>
+                <a href="../about/index.html">About Amora</a>
+                <a href="../booknow/index.html">Contact</a>
+            </div>
+        </div>
+        
+        <div class="sidebar-footer">
+            <div class="socials">
+                <a href="https://www.instagram.com/amorabyvismaya/" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/919447193346" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="mailto:amorabyvismaya@gmail.com" title="Email">
+                    <i class="far fa-envelope"></i>
+                </a>
+            </div>
+            <p>&copy; 2024 Amora</p>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="reviews-section">
+            <h2 class="section-header">Client Love</h2>
+            <p style="margin-bottom: 40px; color: #666; max-width: 600px;">Kind words from our happy brides and clients.</p>
+            
+            <div class="reviews-grid">
+                
+                <div class="review-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="review-text">
+                        "Vismaya made all of us bridesmaids look cohesive and comfortable. Photos came out beautiful and she was a joy to work with."
+                    </p>
+                    <span class="review-author">— Anjali, Palakkad</span>
+                </div>
+
+                <div class="review-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="review-text">
+                        "On time, gentle, and extremely professional. Would recommend for any wedding events."
+                    </p>
+                    <span class="review-author">— Meera</span>
+                </div>
+
+                <div class="review-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="review-text">
+                        "The pre-pleating saved us so much time — seamless changes between ceremonies."
+                    </p>
+                    <span class="review-author">— Roshni</span>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
